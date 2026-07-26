@@ -1,4 +1,3 @@
-<!-- app/pages/tariffs.vue -->
 <script setup lang="ts">
 import commissionsData from "~/assets/data/wb-commissions.json";
 
@@ -13,7 +12,11 @@ interface CommissionRow {
   booking: number | null;
 }
 
-const rows = (commissionsData.rows ?? []) as CommissionRow[];
+const rawData = commissionsData as any;
+const rows = (
+  Array.isArray(rawData) ? rawData : (rawData.rows ?? rawData.data ?? [])
+) as CommissionRow[];
+
 const search = ref("");
 
 const filteredRows = computed(() => {
@@ -43,41 +46,68 @@ useSeoMeta({
   title:
     "Таблица комиссий Wildberries 2026 — актуальные тарифы WB по категориям",
   description:
-    "Актуальная таблица комиссий и коэффициентов вознаграждения (КВВ) Wildberries по всем категориям товаров: FBW, FBS, DBS. Обновляется автоматически из официального источника.",
+    "Актуальная таблица комиссий и коэффициентов вознаграждения (КВВ) Wildberries по всем категориям товаров: FBW, FBS, DBS.",
 });
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto p-6 space-y-6">
+  <div class="max-w-6xl mx-auto p-6 md:p-8 space-y-6">
     <header class="space-y-2">
-      <h1 class="text-2xl font-bold">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-50">
         Актуальные тарифы и комиссии Wildberries
       </h1>
-      <p class="text-gray-500">
+      <p class="text-gray-500 dark:text-gray-400 flex items-center gap-2">
+        <UIcon name="i-lucide-refresh-cw" class="w-4 h-4" />
         Данные обновляются из официальной таблицы КВВ Wildberries.
-        <span v-if="commissionsData.updatedAt">
-          Последнее обновление:
-          {{ new Date(commissionsData.updatedAt).toLocaleDateString("ru-RU") }}.
+        <span
+          v-if="commissionsData.updatedAt"
+          class="font-medium text-gray-700 dark:text-gray-300"
+        >
+          (Последнее обновление:
+          {{ new Date(commissionsData.updatedAt).toLocaleDateString("ru-RU") }})
         </span>
       </p>
     </header>
 
-    <UInput
-      v-model="search"
-      icon="i-lucide-search"
-      placeholder="Поиск по названию предмета или категории"
-      class="max-w-md"
-    />
+    <!-- Липкий поиск для удобства при скролле длинной таблицы -->
+    <div
+      class="sticky top-20 z-30 bg-gray-50/95 dark:bg-gray-950/95 backdrop-blur-sm py-2"
+    >
+      <UInput
+        v-model="search"
+        icon="i-lucide-search"
+        placeholder="Поиск по названию предмета или категории..."
+        class="w-full md:max-w-md shadow-sm"
+        size="lg"
+      />
+    </div>
 
-    <UTable :data="filteredRows" :columns="columns" class="w-full">
-      <template #fbw-cell="{ row }">{{ fmt(row.original.fbw) }}</template>
-      <template #fbs-cell="{ row }">{{ fmt(row.original.fbs) }}</template>
-      <template #dbs-cell="{ row }">{{ fmt(row.original.dbs) }}</template>
-      <template #cnc-cell="{ row }">{{ fmt(row.original.cnc) }}</template>
-    </UTable>
+    <UCard
+      class="shadow-sm border-gray-200 dark:border-gray-800 overflow-hidden"
+    >
+      <!-- ВАШЕ ПРЕДПОЧТЕНИЕ: Таблица занимает 100% ширины -->
+      <UTable
+        :data="filteredRows"
+        :columns="columns"
+        class="w-full"
+        :ui="{
+          th: 'whitespace-nowrap bg-gray-50 dark:bg-gray-900 font-semibold text-gray-700 dark:text-gray-300',
+          td: 'whitespace-nowrap text-gray-600 dark:text-gray-400',
+        }"
+      >
+        <template #fbw-cell="{ row }">{{ fmt(row.original.fbw) }}</template>
+        <template #fbs-cell="{ row }">{{ fmt(row.original.fbs) }}</template>
+        <template #dbs-cell="{ row }">{{ fmt(row.original.dbs) }}</template>
+        <template #cnc-cell="{ row }">{{ fmt(row.original.cnc) }}</template>
+      </UTable>
+    </UCard>
 
-    <p class="text-sm text-gray-400">
-      Найдено позиций: {{ filteredRows.length }} из {{ rows.length }}
+    <p class="text-sm text-gray-500 dark:text-gray-400 text-right">
+      Найдено позиций:
+      <span class="font-semibold text-gray-900 dark:text-gray-100">{{
+        filteredRows.length
+      }}</span>
+      из {{ rows.length }}
     </p>
   </div>
 </template>

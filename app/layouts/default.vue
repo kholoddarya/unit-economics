@@ -3,10 +3,18 @@ const isHelpOpen = ref(false);
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
-    <UHeader>
+  <div class="flex flex-col min-h-screen bg-gray-50/50 dark:bg-gray-950">
+    <!-- Фиксированная шапка с эффектом размытия -->
+    <UHeader
+      class="sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md"
+    >
       <template #left>
-        <div>Калькулятор юнит-экономики</div>
+        <div
+          class="flex items-center gap-2 font-bold text-xl text-primary-600 dark:text-primary-400"
+        >
+          <UIcon name="i-lucide-calculator" class="w-6 h-6" />
+          <span>Unit Economics</span>
+        </div>
       </template>
       <template #right>
         <UNavigationMenu
@@ -14,24 +22,47 @@ const isHelpOpen = ref(false);
             { label: 'Калькулятор', to: '/' },
             { label: 'История', to: '/history' },
             { label: 'Тарифы WB', to: '/tariffs' },
-            { label: 'Наши политики', to: '/privacy' },
-            { label: 'О проекте', to: '/about' },
           ]"
+          class="hidden md:flex"
+        />
+        <!-- Мобильное меню можно добавить позже, пока оставим кнопку помощи -->
+        <UButton
+          variant="ghost"
+          color="neutral"
+          icon="i-lucide-circle-help"
+          @click="isHelpOpen = true"
+          aria-label="Помощь"
         />
       </template>
     </UHeader>
 
-    <main class="flex-1">
+    <main class="flex-1 w-full">
       <slot />
     </main>
 
-    <footer class="bg-white border-t border-gray-200 py-4">
-      <div class="max-w-5xl mx-auto px-4 text-center text-sm text-gray-500">
-        2026 Калькулятор юнит-экономики для селлеров Wildberries
+    <footer
+      class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 py-6 mt-auto"
+    >
+      <div
+        class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 dark:text-gray-400"
+      >
+        <p>
+          © {{ new Date().getFullYear() }} Калькулятор юнит-экономики для
+          селлеров Wildberries
+        </p>
+        <div class="flex gap-4">
+          <NuxtLink
+            to="/privacy"
+            class="hover:text-primary-600 transition-colors"
+            >Политика конфиденциальности</NuxtLink
+          >
+          <NuxtLink to="/about" class="hover:text-primary-600 transition-colors"
+            >О проекте</NuxtLink
+          >
+        </div>
       </div>
     </footer>
 
-    <!-- Модалка подключена напрямую -->
     <HelpModal
       v-model:open="isHelpOpen"
       title="Как пользоваться калькулятором"
