@@ -1,9 +1,16 @@
 {
-  "categories": [
-    { "id": "clothing", "name": "Одежда", "commission": 0.19, "logisticsMin": 50 },
-    { "id": "electronics", "name": "Электроника", "commission": 0.12, "logisticsMin": 70 },
-    { "id": "home", "name": "Дом и сад", "commission": 0.15, "logisticsMin": 60 }
-  ],
-  "vat": 0.07,
-  "acquiring": 0.015
+  "updatedAt": "2026-07-26T12:00:00.000Z",
+  "source": "manual-mvp",
+  "rows": [
+    { "parentCategory": "Одежда", "subject": "", "fbw": 19.5, "fbs": 17.5, "dbs": 7, "edbs": 3, "cnc": 2, "booking": 0 },
+    { "parentCategory": "Обувь", "subject": "", "fbw": 19.5, "fbs": 17.5, "dbs": 7, "edbs": 3, "cnc": 2, "booking": 0 },
+    { "parentCategory": "Электроника", "subject": "", "fbw": 12.0, "fbs": 10.0, "dbs": 5, "edbs": 3, "cnc": 2, "booking": 0 },
+    { "parentCategory": "Дом и сад", "subject": "", "fbw": 15.0, "fbs": 13.0, "dbs": 6, "edbs": 3, "cnc": 2, "booking": 0 },
+    { "parentCategory": "Красота", "subject": "", "fbw": 17.0, "fbs": 15.0, "dbs": 6, "edbs": 3, "cnc": 2, "booking": 0 },
+    { "parentCategory": "Детские товары", "subject": "", "fbw": 13.0, "fbs": 11.0, "dbs": 5, "edbs": 3, "cnc": 2, "booking": 0 },
+    { "parentCategory": "Продукты питания", "subject": "", "fbw": 15.0, "fbs": 13.0, "dbs": 6, "edbs": 3, "cnc": 2, "booking": 0 },
+    { "parentCategory": "Зоотовары", "subject": "", "fbw": 15.0, "fbs": 13.0, "dbs": 6, "edbs": 3, "cnc": 2, "booking": 0 },
+    { "parentCategory": "Аксессуары", "subject": "", "fbw": 19.5, "fbs": 17.5, "dbs": 7, "edbs": 3, "cnc": 2, "booking": 0 },
+    { "parentCategory": "Книги", "subject": "", "fbw": 15.0, "fbs": 13.0, "dbs": 6, "edbs": 3, "cnc": 2, "booking": 0 }
+  ]
 }
