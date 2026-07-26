@@ -1,0 +1,9 @@
+{
+  "categories": [
+    { "id": "clothing", "name": "Одежда", "commission": 0.19, "logisticsMin": 50 },
+    { "id": "electronics", "name": "Электроника", "commission": 0.12, "logisticsMin": 70 },
+    { "id": "home", "name": "Дом и сад", "commission": 0.15, "logisticsMin": 60 }
+  ],
+  "vat": 0.07,
+  "acquiring": 0.015
+}

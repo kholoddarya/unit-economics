@@ -1,0 +1,49 @@
+{
+  "marketplace": "ozon",
+  "updatedAt": "2026-07-26",
+  "sourceUrl": "https://seller-services.ozon.ru/app/settings/commission",
+  "categories": [
+    {
+      "id": "clothing",
+      "name": "Одежда",
+      "commission": 0.149,
+      "minCommission": 30,
+      "logisticsLastMile": 60,
+      "logisticsMagistral": 0.22
+    },
+    {
+      "id": "electronics",
+      "name": "Электроника",
+      "commission": 0.12,
+      "minCommission": 50,
+      "logisticsLastMile": 75,
+      "logisticsMagistral": 0.25
+    },
+    {
+      "id": "home",
+      "name": "Дом и сад",
+      "commission": 0.14,
+      "minCommission": 40,
+      "logisticsLastMile": 65,
+      "logisticsMagistral": 0.23
+    },
+    {
+      "id": "beauty",
+      "name": "Красота",
+      "commission": 0.17,
+      "minCommission": 35,
+      "logisticsLastMile": 55,
+      "logisticsMagistral": 0.21
+    },
+    {
+      "id": "kids",
+      "name": "Детские товары",
+      "commission": 0.13,
+      "minCommission": 30,
+      "logisticsLastMile": 60,
+      "logisticsMagistral": 0.22
+    }
+  ],
+  "acquiring": 0.015,
+  "vat": 0
+}
