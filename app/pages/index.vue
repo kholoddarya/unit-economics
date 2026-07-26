@@ -23,16 +23,26 @@ const rows = (
 ) as CommissionRow[];
 
 const subjectItems = computed(() =>
-  rows.map((r) => ({
-    label: `${r.subject} (${r.parentCategory})`,
-    value: r.subject,
-  })),
+  rows.map((r) => {
+    const hasSubject = r.subject?.trim();
+    return {
+      label: hasSubject
+        ? `${r.subject} (${r.parentCategory})`
+        : r.parentCategory,
+      value: hasSubject ? r.subject : r.parentCategory,
+    };
+  }),
 );
 
 const selectedSubject = ref<string>("");
-const selectedRow = computed(
-  () => rows.find((r) => r.subject === selectedSubject.value) ?? null,
-);
+const selectedRow = computed(() => {
+  if (!selectedSubject.value) return null;
+  return (
+    rows.find((r) => r.subject === selectedSubject.value) ??
+    rows.find((r) => r.parentCategory === selectedSubject.value) ??
+    null
+  );
+});
 
 const scheme = ref<"fbw" | "fbs" | "dbs">("fbw");
 const schemeItems = [
